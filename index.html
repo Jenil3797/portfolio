@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenil Diyora | Cyber Security Portfolio</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0f172a; /* Deep Ink Navy */
+            --card-bg: rgba(30, 41, 59, 0.7);  /* Slate Glass */
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;   /* Cyan/Water Blue */
+            --accent-hover: #0ea5e9;
+            --accent-secondary: #818cf8; /* Indigo/Purple Ink */
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            /* "Cyber Ink" Background Effect */
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        h1, h2, h3 { color: var(--text-main); margin-bottom: 1rem; }
+        h2 { 
+            font-size: 2rem; 
+            border-left: 4px solid var(--accent); 
+            padding-left: 15px; 
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        /* --- HEADER --- */
+        header {
+            padding: 100px 0 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-name {
+            font-size: 4rem;
+            font-weight: 800;
+            background: -webkit-linear-gradient(45deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .hero-role {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .hero-bio {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .contact-bar {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            color: var(--accent);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.05);
+            backdrop-filter: blur(4px);
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        /* --- GRID SYSTEMS --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- CARDS --- */
+        .card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .project-stat {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 12px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399; /* Emerald Green */
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        /* --- SKILLS SECTION --- */
+        .skill-category {
+            background: rgba(255,255,255,0.02);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .skill-category h3 { 
+            color: var(--accent); 
+            font-size: 1.2rem; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .skill-list li {
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        
+        .skill-list li i {
+            margin-right: 10px;
+            color: var(--accent-secondary);
+            width: 16px;
+        }
+
+        /* --- TIMELINE/EDUCATION --- */
+        .timeline-item {
+            margin-bottom: 20px;
+        }
+        .timeline-date {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .footer-loc {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-name { font-size: 2.5rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            header { padding: 60px 0 40px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header class="container">
+        <h1 class="hero-name">Jenil Diyora</h1>
+        <p class="hero-role">Cyber Security Analyst & Researcher</p>
+        <p class="hero-bio">
+            M.Sc. Candidate bridging the gap between AI-driven threat detection and offensive security operations.
+            Specialized in Malware Analysis, DFIR, and Network Security.
+        </p>
+        
+        <div class="contact-bar">
+            <a href="mailto:jenil.diyora3797@gmail.com" class="btn">
+                <i data-lucide="mail"></i> Email Me
+            </a>
+            <a href="http://www.linkedin.com/in/jenil-diyora" class="btn">
+                <i data-lucide="linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/Jenil3797" class="btn">
+                <i data-lucide="github"></i> GitHub
+            </a>
+            <a href="https://drive.google.com/file/d/1AWg82YdcdvWV0MIAYnuVZcTcLmrqPKhh/view?usp=sharing" class="btn">
+                <i data-lucide="file-text"></i> Resume
+            </a>
+        </div>
+    </header>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+        <div class="container">
+            <h2><i data-lucide="cpu"></i> Featured Projects</h2>
+            <div class="grid-2">
+                
+                <!-- Project 1: AI Malware -->
+                <div class="card">
+                    <h3>AI-Driven Malware Detection</h3>
+                    <div class="project-stat">
+                        <i data-lucide="check-circle" style="width:14px; display:inline;"></i> 99.42% Accuracy
+                    </div>
+                    <p style="color: var(--text-muted); margin-top: 15px;">
+                        Engineered a machine learning pipeline to detect polymorphic malware. Extracted 57 critical attributes (PE headers, Section Entropy) from 138,000+ files to predict malicious behavior.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Random Forest</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">PEfile</span>
+                    </div>
+                </div>
+
+                <!-- Project 2: SIEM -->
+                <div class="card">
+                    <h3>SIEM Deployment & Threat Hunting</h3>
+                    <div class="project-stat" style="color: #60a5fa; background: rgba(96, 165, 250, 0.1);">
+                        <i data-lucide="shield-alert" style="width:14px; display:inline;"></i> Active Defense
+                    </div>
+                    <p style="color: var(--text-muted); margin-top: 15px;">
+                        Deployed Wazuh SIEM to monitor endpoint activities. Executed simulated brute-force (Hydra) and SQL injection attacks to test detection rules and refine alert thresholds.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Wazuh SIEM</span>
+                        <span class="tech-tag">Hydra</span>
+                        <span class="tech-tag">Log Analysis</span>
+                        <span class="tech-tag">Incident Response</span>
+                    </div>
+                </div>
+
+                <!-- Project 3: Reverse Engineering -->
+                <div class="card">
+                    <h3>Reverse Engineering Lab</h3>
+                    <p style="color: var(--text-muted); margin-top: 15px;">
+                        Analyzed obfuscated Windows executables (UPX packed) to identify function calls and potential buffer overflows. Developed exploits for vulnerable services (vsftpd).
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">IDA Pro</span>
+                        <span class="tech-tag">WinDBG</span>
+                        <span class="tech-tag">Metasploit</span>
+                        <span class="tech-tag">Assembly</span>
+                    </div>
+                </div>
+
+                <!-- Project 4: Cloud & IoT -->
+                <div class="card">
+                    <h3>Cloud & IoT Security</h3>
+                    <p style="color: var(--text-muted); margin-top: 15px;">
+                        Hardened AWS infrastructure by configuring IAM policies for least privilege. Simulated IoT attacks using Arduino/ESP32 hardware for motion detection and sensor data interception.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AWS IAM</span>
+                        <span class="tech-tag">EC2 & S3</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">IoT Security</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <div class="container">
+            <h2><i data-lucide="terminal"></i> Technical Arsenal</h2>
+            <div class="grid-3">
+                
+                <div class="skill-category">
+                    <h3>Offensive Security</h3>
+                    <ul class="skill-list">
+                        <li><i data-lucide="chevron-right"></i> Burp Suite Professional</li>
+                        <li><i data-lucide="chevron-right"></i> Metasploit & MSFvenom</li>
+                        <li><i data-lucide="chevron-right"></i> Nmap & Hydra</li>
+                        <li><i data-lucide="chevron-right"></i> OWASP ZAP</li>
+                        <li><i data-lucide="chevron-right"></i> MobSF (Mobile VAPT)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Defensive & SIEM</h3>
+                    <ul class="skill-list">
+                        <li><i data-lucide="chevron-right"></i> Wazuh SIEM</li>
+                        <li><i data-lucide="chevron-right"></i> Splunk (Basics)</li>
+                        <li><i data-lucide="chevron-right"></i> Snort & Wireshark</li>
+                        <li><i data-lucide="chevron-right"></i> PRTG Network Monitor</li>
+                        <li><i data-lucide="chevron-right"></i> Autopsy (Forensics)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Core & Code</h3>
+                    <ul class="skill-list">
+                        <li><i data-lucide="chevron-right"></i> Python (Pandas/Scikit)</li>
+                        <li><i data-lucide="chevron-right"></i> Reverse Eng. (IDA Pro)</li>
+                        <li><i data-lucide="chevron-right"></i> Blockchain (Solidity)</li>
+                        <li><i data-lucide="chevron-right"></i> Cloud (AWS EC2, S3)</li>
+                        <li><i data-lucide="chevron-right"></i> C / Java / Bash</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE & EDUCATION -->
+    <section id="timeline">
+        <div class="container">
+            <h2><i data-lucide="graduation-cap"></i> Education & Experience</h2>
+            <div class="grid-2">
+                
+                <!-- Education Column -->
+                <div>
+                    <h3 style="font-size:1.2rem; color:var(--text-muted); margin-bottom:20px;">Academic History</h3>
+                    
+                    <div class="card timeline-item">
+                        <span class="timeline-date">Aug 2024 – Present</span>
+                        <h3>M.Sc. in Cyber Security</h3>
+                        <p style="color: var(--accent);">Narnarayan Shastri Institute of Technology</p>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                            CGPA: 7.25 | Focus on Digital Forensics, Cloud Security, and Blockchain.
+                        </p>
+                    </div>
+
+                    <div class="card timeline-item">
+                        <span class="timeline-date">Aug 2021 – May 2024</span>
+                        <h3>BCA</h3>
+                        <p style="color: var(--accent);">Parul University, Vadodara</p>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                            CGPA: 7.85 | First Class Distinction
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Experience Column -->
+                <div>
+                    <h3 style="font-size:1.2rem; color:var(--text-muted); margin-bottom:20px;">Professional History</h3>
+                    
+                    <div class="card timeline-item">
+                        <span class="timeline-date">Dec 2022 – Jan 2023</span>
+                        <h3>Cyber Security Intern</h3>
+                        <p style="color: var(--accent);">Cybersec Infotech</p>
+                        <ul class="skill-list" style="margin-top: 10px;">
+                            <li><i data-lucide="check"></i> Comprehensive security training.</li>
+                            <li><i data-lucide="check"></i> Hands-on exposure to industry tools.</li>
+                            <li><i data-lucide="check"></i> Mentorship from senior analysts.</li>
+                        </ul>
+                    </div>
+
+                     <div class="card timeline-item">
+                        <span class="timeline-date">2024</span>
+                        <h3>Certifications</h3>
+                        <ul class="skill-list" style="margin-top: 10px;">
+                            <li><i data-lucide="award"></i> TryHackMe: Advent of Cyber 2024</li>
+                            <li><i data-lucide="award"></i> Cyber Security Course (Teachnook)</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h3 style="margin-bottom: 5px;">Jenil Diyora</h3>
+            <p>Built with code & cognitive security.</p>
+            <div class="footer-loc">
+                <i data-lucide="map-pin" style="width:16px;"></i> Surat, Gujarat, India
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
